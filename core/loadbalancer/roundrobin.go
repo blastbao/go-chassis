@@ -19,7 +19,11 @@ func newRoundRobinStrategy() Strategy {
 }
 
 //ReceiveData receive data
-func (r *RoundRobinStrategy) ReceiveData(inv *invocation.Invocation, instances []*registry.MicroServiceInstance, serviceKey string) {
+func (r *RoundRobinStrategy) ReceiveData(
+	inv *invocation.Invocation,
+	instances []*registry.MicroServiceInstance,
+	serviceKey string,
+) {
 	r.instances = instances
 	r.key = serviceKey
 }

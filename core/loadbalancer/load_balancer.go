@@ -49,8 +49,7 @@ func (e LBError) Error() string {
 }
 
 // BuildStrategy query instance list and give it to Strategy then return Strategy
-func BuildStrategy(i *invocation.Invocation,
-	s Strategy) (Strategy, error) {
+func BuildStrategy(i *invocation.Invocation, s Strategy) (Strategy, error) {
 
 	if s == nil {
 		s = &RoundRobinStrategy{}

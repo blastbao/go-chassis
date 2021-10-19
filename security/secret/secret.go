@@ -28,10 +28,13 @@ import (
 
 //GenRSAPrivateKey generate a rsa private key
 func GenRSAPrivateKey(bits int) ([]byte, error) {
+	// 私钥
 	privateKey, err := rsa.GenerateKey(rand.Reader, bits)
 	if err != nil {
 		return nil, err
 	}
+
+	//
 	derStream := x509.MarshalPKCS1PrivateKey(privateKey)
 	block := &pem.Block{
 		Type:  "RSA PRIVATE KEY",
@@ -48,11 +51,12 @@ func GenRSAPrivateKey(bits int) ([]byte, error) {
 
 //GenRSAKeyPair create rsa key pair
 func GenRSAKeyPair(bits int) (*rsa.PrivateKey, *rsa.PublicKey, error) {
+	// 私钥
 	private, err := rsa.GenerateKey(rand.Reader, bits)
 	if err != nil {
 		return nil, nil, err
 	}
-
+	// 公钥
 	public := &private.PublicKey
 	return private, public, nil
 }

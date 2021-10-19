@@ -10,14 +10,13 @@ import (
 )
 
 var (
-
 	// successiveFailureCount success and failure count
 	successiveFailureCount      map[string]int
 	successiveFailureCountMutex sync.RWMutex
 )
 
 func init() {
-	successiveFailureCount = make(map[string]int)
+	successiveFailureCount = make(map[string]int) // 连续失败计数
 }
 
 //DeleteSuccessiveFailureCount deleting cookie from failure count map
@@ -40,7 +39,7 @@ func IncreaseSuccessiveFailureCount(cookieValue string) {
 	successiveFailureCountMutex.Lock()
 	c, ok := successiveFailureCount[cookieValue]
 	if ok {
-		successiveFailureCount[cookieValue] = c + 1
+		successiveFailureCount[cookieValue] = c + 1 // 增加连续失败数
 		successiveFailureCountMutex.Unlock()
 		return
 	}

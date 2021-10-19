@@ -47,15 +47,19 @@ import (
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+
 // Precompute the reflect type for error. Can't use error directly
 // because Typeof takes an empty interface value. This is annoying.
 var typeOfError = reflect.TypeOf((*error)(nil)).Elem()
 
+
+
 type operation struct {
 	sync.Mutex // protects counters
-	method     reflect.Method
-	In         []reflect.Type
-	Out        []reflect.Type
+	method     reflect.Method	// 方法
+	In         []reflect.Type	// 入参
+	Out        []reflect.Type   // 出参
 }
 
 func (o *operation) Method() reflect.Method {
@@ -67,6 +71,7 @@ func (o *operation) Args() []reflect.Type {
 func (o *operation) Reply() []reflect.Type {
 	return o.Out
 }
+
 
 // Schema struct is having schema name, receiver, and registered methods
 type Schema struct {
@@ -86,7 +91,9 @@ type DefaultProvider struct {
 
 // NewProvider returns the object of DefaultProvider
 func NewProvider(microserviceName string) Provider {
-	return &DefaultProvider{MicroServiceName: microserviceName}
+	return &DefaultProvider{
+		MicroServiceName: microserviceName,
+	}
 }
 
 // Register publishes in the server the set of methods of the
